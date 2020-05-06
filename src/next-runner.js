@@ -1,22 +1,21 @@
 (function () {
   var global = global || this || window || Function('return this')();
   var nx = global.nx || require('@feizheng/next-js-core2');
-  /* prettier-ignore */
-  var STUB_VALUE = function (value) { return value; };
+  var isPromise = nx.isPromise || require('@feizheng/next-is-promise');
 
   var NxRunner = nx.declare('nx.Runner', {
     statics: {
-      serial: function (inTasks, inCallback) {
-        var callback = inCallback || STUB_VALUE;
+      serial: function (inTasks) {
         return inTasks.reduce(function (promise, task) {
           return promise.then(function () {
-            callback(task);
+            return isPromise(task) ? task : task();
           });
         }, Promise.resolve());
       },
-      parallel: function (inTasks, inCallback) {
-        var callback = inCallback || STUB_VALUE;
-        var tasks = inTasks.map(callback);
+      parallel: function (inTasks) {
+        var tasks = inTasks.map(function (task) {
+          return isPromise(task) ? task : task();
+        });
         return Promise.all(tasks);
       }
     }
