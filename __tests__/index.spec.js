@@ -1,6 +1,5 @@
-(function () {
-  var nx = require('@feizheng/next-js-core2');
-  var NxRunner = require('../src/next-runner');
+(function() {
+  const NxRunner = require('../src');
 
   jest.setTimeout(30 * 1e3);
 
@@ -38,11 +37,11 @@
       //   done();
       // });
 
-
       NxRunner.serial([fn1, fn2, fn3]).then((res) => {
         console.log(res);
         done();
       });
     });
   });
+
 })();

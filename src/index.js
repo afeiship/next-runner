@@ -1,16 +1,8 @@
-/*!
- * name: @feizheng/next-runner
- * description: Task runnter for next.
- * homepage: https://github.com/afeiship/next-runner
- * version: 1.0.0
- * date: 2020-05-06T00:57:04.160Z
- * license: MIT
- */
-
-(function () {
+(function() {
   var global = global || this || window || Function('return this')();
-  var nx = global.nx || require('@feizheng/next-js-core2');
-  var isPromise = nx.isPromise || require('@feizheng/next-is-promise');
+  var nx = global.nx || require('@jswork/next');
+
+  var isPromise = nx.isPromise || require('@jswork/next-is-promise');
 
   var NxRunner = nx.declare('nx.Runner', {
     statics: {
@@ -34,5 +26,3 @@
     module.exports = NxRunner;
   }
 })();
-
-//# sourceMappingURL=next-runner.js.map
